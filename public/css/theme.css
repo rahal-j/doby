@@ -1,0 +1,146 @@
+/*********************************************************************************
+* WEB700 – Assignment 04
+* I declare that this assignment is my own work in accordance with Seneca Academic Policy. No part
+* of this assignment has been copied manually or electronically from any other source
+* (including 3rd party web sites) or distributed to other students.
+*
+* Name: Nalinda Puthantrige   Student ID: 150367233   Date: 06/23/2024
+*********************************************************************************/
+
+/* Import Google Font - Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Full-page gradient background */
+html, body {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(to bottom right, rgb(200, 255, 146), rgb(255, 255, 255)); /* Can be customized */
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Flexbox layout for the body to push footer to bottom */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body covers full viewport height */
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Main content area should take up remaining space */
+.container {
+    flex: 1;
+    padding: 0 15px; /* Add padding to avoid content touching the edges */
+}
+
+/* Navigation Bar Styles */
+.bg-light {
+    background-color: #2c3e50; /* Dark blue or any preferred color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow */
+}
+
+/* Navigation Brand Styles */
+.navbar-brand {
+    font-family: 'Roboto', sans-serif;
+    color: #0a5467; /* Light grey */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow */
+}
+
+.navbar-brand:hover {
+    color: #3498db; /* Bright blue */
+}
+
+/* Navigation Link Styles */
+.nav-link {
+    font-family: 'Roboto', sans-serif;
+    color: #0d27ea; /* Light grey */
+}
+
+/* Active Navigation Item Styles */
+.nav-item.active .nav-link {
+    color: #fff; /* White text color for active link */
+    background-color: #3498db; /* Background color for active link */
+    border-radius: 4px; /* Rounded corners for active link */
+}
+
+.nav-link:hover {
+    color: #3498db; /* Bright blue */
+}
+
+/* Primary Button Styles */
+.btn-primary {
+    background-color: #3498db; /* Bright blue */
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow */
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+.btn-primary:hover {
+    background-color: #2c3e50; /* Dark blue */
+    color: #fff;
+}
+
+/* Table Styles */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.table thead th {
+    background-color: #2980b9; /* Lighter blue */
+    color: #fff;
+}
+
+.table tbody tr:nth-child(odd) td {
+    background-color: #f2f2f2; /* Light grey */
+}
+
+/* Header Styles */
+h1, h2, h3, h4, h5, h6 {
+    color: #2c3e50; /* Dark blue */
+    margin-bottom: 1rem;
+    font-family: 'Roboto', sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow */
+}
+
+/* Link Styles */
+a {
+    color: #3498db; /* Bright blue */
+}
+
+a:hover {
+    color: #2c3e50; /* Dark blue */
+    text-decoration: none;
+}
+
+/* Fieldset Legend Styles */
+legend {
+    padding: 0.5rem 1rem;
+    font-family: 'Roboto', sans-serif;
+    color: #2c3e50; /* Dark blue */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow */
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 1rem;
+    text-align: center;
+    margin-top: auto; /* Push footer to bottom when content is short */
+}
+
+/* Additional Margin Utility Class */
+.mt-4 {
+    margin-top: 2rem;
+}

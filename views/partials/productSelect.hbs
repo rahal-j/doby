@@ -1,0 +1,18 @@
+<div class="product-group mt-2">
+    <div class="row">
+        <div class="col-md-8">
+            <select class="form-control product-select" name="products[{{index}}][id]" required>
+                <option value="">Select a product</option>
+                {{#each products}}
+                    <option value="{{this.id}}" data-price="{{this.price}}">{{this.category}} \ {{this.item}} - Rs {{this.price}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="col-md-3">
+            <input class="form-control product-quantity" name="products[{{index}}][quantity]" type="number" required placeholder="Quantity"/>
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-danger removeProductButton">X</button>
+        </div>
+    </div>
+</div>

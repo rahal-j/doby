@@ -1,0 +1,194 @@
+[
+    {
+        "id": 1,
+        "category": "Wash & Dry",
+        "subcategory": "Clothes",
+        "item": "Clothes 1Kg",
+        "price": 200,
+        "unit": "Kg"
+    },
+    {
+        "id": 2,
+        "category": "Wash & Dry",
+        "subcategory": "Bedsheets & Towels",
+        "item": "Bedsheets & Towels 1Kg",
+        "price": 300,
+        "unit": "Kg"
+    },
+    {
+        "id": 3,
+        "category": "Wash & Dry",
+        "subcategory": "Blankets",
+        "item": "Blankets 1Kg",
+        "price": 500,
+        "unit": "Kg"
+    },
+    {
+        "id": 4,
+        "category": "Wash & Dry",
+        "subcategory": "Curtains",
+        "item": "Curtains Large",
+        "price": 500,
+        "unit": "Kg"
+    },
+    {
+        "id": 5,
+        "category": "Wash & Dry",
+        "subcategory": "Curtains",
+        "item": "Curtains Small",
+        "price": 400,
+        "unit": "Kg"
+    },
+    {
+        "id": 6,
+        "category": "Wash & Dry",
+        "subcategory": "Overalls",
+        "item": "Overalls",
+        "price": 300,
+        "unit": "piece"
+    },
+    {
+        "id": 7,
+        "category": "Wash & Press",
+        "subcategory": "Shirts",
+        "item": "Shirt",
+        "price": 200,
+        "unit": "piece"
+    },
+    {
+        "id": 8,
+        "category": "Wash & Press",
+        "subcategory": "Trousers",
+        "item": "Trouser",
+        "price": 220,
+        "unit": "piece"
+    },
+    {
+        "id": 9,
+        "category": "Press Only",
+        "subcategory": "Shirts",
+        "item": "Shirt",
+        "price": 120,
+        "unit": "piece"
+    },
+    {
+        "id": 10,
+        "category": "Press Only",
+        "subcategory": "Trousers",
+        "item": "Trouser",
+        "price": 150,
+        "unit": "piece"
+    },
+    {
+        "id": 11,
+        "category": "Press Only",
+        "subcategory": "Curtains",
+        "item": "Curtain Large",
+        "price": 600,
+        "unit": "piece"
+    },
+    {
+        "id": 12,
+        "category": "Press Only",
+        "subcategory": "Curtains",
+        "item": "Curtain Small",
+        "price": 300,
+        "unit": "piece"
+    },
+    {
+        "id": 13,
+        "category": "Spot Removing",
+        "subcategory": "Ink",
+        "item": "Shirt",
+        "price": 350,
+        "unit": "piece"
+    },
+    {
+        "id": 14,
+        "category": "Spot Removing",
+        "subcategory": "Ink",
+        "item": "Trouser",
+        "price": 400,
+        "unit": "piece"
+    },
+    {
+        "id": 15,
+        "category": "Spot Removing",
+        "subcategory": "Ink",
+        "item": "Denim",
+        "price": 500,
+        "unit": "piece"
+    },
+    {
+        "id": 16,
+        "category": "Spot Removing",
+        "subcategory": "Rust",
+        "item": "Shirt",
+        "price": 250,
+        "unit": "piece"
+    },
+    {
+        "id": 17,
+        "category": "Spot Removing",
+        "subcategory": "Rust",
+        "item": "Trouser",
+        "price": 300,
+        "unit": "piece"
+    },
+    {
+        "id": 18,
+        "category": "Spot Removing",
+        "subcategory": "Rust",
+        "item": "Denim",
+        "price": 300,
+        "unit": "piece"
+    },
+    {
+        "id": 19,
+        "category": "Spot Removing",
+        "subcategory": "Tar & Oils",
+        "item": "Shirt",
+        "price": 350,
+        "unit": "piece"
+    },
+    {
+        "id": 20,
+        "category": "Spot Removing",
+        "subcategory": "Tar & Oils",
+        "item": "Trouser",
+        "price": 400,
+        "unit": "piece"
+    },
+    {
+        "id": 21,
+        "category": "Spot Removing",
+        "subcategory": "Tar & Oils",
+        "item": "Denim",
+        "price": 450,
+        "unit": "piece"
+    },
+    {
+        "id": 22,
+        "category": "Dry Cleaning",
+        "subcategory": "Court Kit",
+        "item": "Court Kit",
+        "price": 800,
+        "unit": "piece"
+    },
+    {
+        "id": 23,
+        "category": "Dry Cleaning",
+        "subcategory": "Curtains",
+        "item": "Curtain 1Kg",
+        "price": 1000,
+        "unit": "Kg"
+    },
+    {
+        "id": 24,
+        "category": "Dry Cleaning",
+        "subcategory": "Clothes",
+        "item": "Clothes 1Kg",
+        "price": 800,
+        "unit": "Kg"
+    }
+]

@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/server.js", // Update with your entry file
+            "env": {
+                "NODE_ENV": "development"
+            }
+        }
+    ]
+}

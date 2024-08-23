@@ -1,0 +1,65 @@
+<script src="/js/order.js"></script>
+<div class="row">
+    <main class="col-md-12">
+        <h2>Create Order</h2>
+
+        <!-- Customer Search Form -->
+        <form method="GET" action="/customer/search">
+            <div class="form-group">
+                <label for="phoneNumber">Search Customer by Phone Number:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="Enter phone number" value="{{phoneNumber}}">
+                <button type="submit" class="btn btn-primary mt-2">Search</button>
+            </div>
+        </form>
+
+        {{#if error}}
+            <div class="alert alert-danger mt-3">
+                {{error}}
+            </div>
+        {{/if}}
+
+        {{#if customer}}
+            <div id="customerDetails" class="mt-3">
+                <h3>Customer Details</h3>
+                <p><strong>Name:</strong> {{customer.firstName}} {{customer.lastName}}</p>
+                <p><strong>Email:</strong> {{customer.email}}</p>
+                <p><strong>Address:</strong> {{customer.address}}</p>
+            </div>
+
+            <!-- Delivery Date and Add Order Form -->
+            <form method="POST" action="/order/add">
+                <div class="form-group mt-3">
+                    <label for="deliveryDate">Delivery Date and Time:</label>
+                    <input type="datetime-local" id="deliveryDate" name="deliveryDate" class="form-control" required>
+                </div>
+
+                <!-- Products Section -->
+                <div id="productsContainer" class="mt-3">
+                    {{> productSelect products=products index=0}}
+                </div>
+
+                <button type="button" id="addProductButton" class="btn btn-secondary mt-3">Add Another Product</button>
+
+                <!-- Subtotal, Discount, and Total -->
+                <div class="form-group mt-3">
+                    <label for="subtotal">Subtotal:</label>
+                    <input type="number" id="subtotal" name="subtotal" class="form-control" readonly>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="discount">Discount (Rs):</label>
+                    <input type="number" id="discount" name="discount" class="form-control" value="0" min="0">
+                </div>
+                <div class="form-group mt-3">
+                    <label for="total">Total:</label>
+                    <input type="number" id="total" name="total" class="form-control" readonly>
+                </div>
+
+                <button type="submit" class="btn btn-success mt-3">Add Order</button>
+            </form>
+        {{/if}}
+
+        {{#if showCreateCustomerForm}}
+            {{> addCustomer}} <!-- Include the addCustomer partial -->
+        {{/if}}
+    </main>
+</div>

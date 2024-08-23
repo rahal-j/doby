@@ -1,0 +1,122 @@
+[
+  {
+    "orderId": 1,
+    "customerId": 3,
+    "customerName": "John Doe",
+    "products": [
+      {
+        "productId": 1,
+        "productName": "Clothes 1Kg",
+        "price": 200,
+        "quantity": 2
+      },
+      {
+        "productId": 4,
+        "productName": "Curtains Large",
+        "price": 500,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 900,
+    "total": 900,
+    "paymentAmount": 1000,
+    "change": 100,
+    "orderDate": "2024-07-29"
+  },
+  {
+    "orderId": 2,
+    "customerId": 5,
+    "customerName": "Alice Smith",
+    "products": [
+      {
+        "productId": 2,
+        "productName": "Bedsheets & Towels 1Kg",
+        "price": 300,
+        "quantity": 3
+      },
+      {
+        "productId": 6,
+        "productName": "Shirt (Press Only)",
+        "price": 120,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 1140,
+    "total": 1140,
+    "paymentAmount": 1200,
+    "change": 60,
+    "orderDate": "2024-07-29"
+  },
+  {
+    "customerId": "1",
+    "productId": "1",
+    "quantity": "1",
+    "subtotal": 200,
+    "total": 200,
+    "paymentAmount": "0",
+    "change": -200,
+    "id": 3
+  },
+  {
+    "customerId": "2",
+    "productId": "1",
+    "quantity": "1",
+    "subtotal": 200,
+    "total": 200,
+    "paymentAmount": "0",
+    "change": -200,
+    "id": 4
+  },
+  {
+    "customerId": "2",
+    "productId": "1",
+    "quantity": "1",
+    "subtotal": 200,
+    "total": 200,
+    "paymentAmount": "0",
+    "change": -200,
+    "id": 5
+  },
+  {
+    "customerId": 1,
+    "customerName": "John Doe",
+    "deliveryDate": "2024-08-22T11:05",
+    "products": [
+      {
+        "id": "1",
+        "quantity": "1"
+      }
+    ],
+    "subtotal": "200.00",
+    "discount": "0",
+    "total": "200.00",
+    "id": 6
+  },
+  {
+    "customerId": 1,
+    "customerName": "John Doe",
+    "deliveryDate": "2024-08-22T01:05",
+    "products": [
+      {
+        "id": "1",
+        "quantity": "1"
+      },
+      {
+        "id": "2",
+        "quantity": "1"
+      },
+      {
+        "id": "1",
+        "quantity": "1"
+      },
+      {
+        "id": "9",
+        "quantity": "1"
+      }
+    ],
+    "subtotal": "820.00",
+    "discount": "0",
+    "total": "820.00",
+    "id": 7
+  }
+]
