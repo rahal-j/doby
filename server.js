@@ -19,11 +19,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set up session middleware
+// Set up session middleware to use PostgreSQL for session storage
 app.use(session({
     secret: 'your_secret_key',  // Replace with your own secret key
     store: new SequelizeStore({
-        db: sequelize,
+        db: sequelize, // Use the Sequelize instance connected to PostgreSQL
     }),
     resave: false,
     saveUninitialized: false,
