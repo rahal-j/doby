@@ -100,6 +100,7 @@ module.exports.addOrder = function (orderData, products) {
         Order.create({
             customerId: orderData.customerId,
             customerName: orderData.customerName,
+            orderDate: orderData.orderDate || new Date(),
             deliveryDate: orderData.deliveryDate,
             subtotal: orderData.subtotal,
             discount: orderData.discount,
@@ -150,6 +151,70 @@ module.exports.searchCustomer = function (phoneNumber) {
         .catch(error => {
             console.error('Error searching for customer by phone number:', error);
             reject("Error searching for customer");
+        });
+    });
+};
+
+// Delete a customer by ID
+module.exports.deleteCustomer = function (customerId) {
+    return new Promise((resolve, reject) => {
+        Customer.destroy({
+            where: {
+                id: customerId
+            }
+        })
+        .then(deleted => {
+            if (deleted) {
+                resolve(`Customer with ID ${customerId} deleted successfully.`);
+            } else {
+                reject("Customer not found");
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting customer:', error);
+            reject("Unable to delete customer");
+        });
+    });
+};
+
+module.exports.deleteOrder = function (orderId) {
+    return new Promise((resolve, reject) => {
+        Order.destroy({
+            where: {
+                id: orderId
+            }
+        })
+        .then(deleted => {
+            if (deleted) {
+                resolve(`Order with ID ${orderId} deleted successfully.`);
+            } else {
+                reject("Order not found");
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting order:', error);
+            reject("Unable to delete order");
+        });
+    });
+};
+
+module.exports.deleteProduct = function (productId) {
+    return new Promise((resolve, reject) => {
+        Product.destroy({
+            where: {
+                id: productId
+            }
+        })
+        .then(deleted => {
+            if (deleted) {
+                resolve(`Product with ID ${productId} deleted successfully.`);
+            } else {
+                reject("Product not found");
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting product:', error);
+            reject("Unable to delete product");
         });
     });
 };

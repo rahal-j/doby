@@ -7,6 +7,8 @@ const exphbs = require('express-handlebars');
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
 const { sequelize } = require('./modules/models');
+const nodemailer = require('nodemailer');
+
 
 // Set up your PostgreSQL connection string
 const postgresConnectionString = 'postgres://LaundryDB_owner:Ztc3rSby9Qfj@ep-tiny-darkness-a5xwx9p5.us-east-2.aws.neon.tech:5432/LaundryDB?sslmode=require';
@@ -15,6 +17,14 @@ const postgresConnectionString = 'postgres://LaundryDB_owner:Ztc3rSby9Qfj@ep-tin
 const sessionStore = new pgSession({
     conString: postgresConnectionString, // PostgreSQL connection string
     tableName: 'session', // Default is 'session', change if your table name is different
+});
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'nalinda.rahal@gmail.com', // Your email address
+        pass: 'zilw ylbf egsa zzpj'   // Your email password or app-specific password
+    }
 });
 
 // Middleware to parse JSON bodies
@@ -65,6 +75,25 @@ app.use(function (req, res, next) {
     app.locals.activeRoute = "/" + (isNaN(route.split('/')[1]) ? route.replace(/\/(?!.*)/, "") : route.replace(/\/(.*)/, ""));
     next();
 });
+
+const sendOrderConfirmationEmail = async (order, customer) => {
+    try {
+        const mailOptions = {
+            from: 'nalinda.rahal@gmail.com', // Sender address
+            to: customer.email, // Recipient's email
+            subject: 'Order Confirmation', // Subject line
+            text: `Dear ${customer.firstName},\n\nYour order has been placed successfully.\n\nOrder Details:\n- Order ID: ${order.id}\n\n- Order Date: ${order.orderDate}\n- Total: $${order.total}\n- Delivery Date: ${order.deliveryDate}\n\nThank you for your business!\n\nBest regards,\nYour Company Name`, // Plain text body
+            // You can also include an HTML body if needed
+            // html: '<p>Your HTML message here</p>'
+        };
+
+        // Send the email
+        await transporter.sendMail(mailOptions);
+        console.log('Order confirmation email sent successfully!');
+    } catch (error) {
+        console.error('Error sending email:', error);
+    }
+};
 
 // Route to render the "Add Customer" form
 app.get('/customer/add', (req, res) => {
@@ -237,6 +266,8 @@ app.post('/order/add', async (req, res) => {
         // Create the order and associate products with it
         const createdOrder = await laundryData.addOrder(newOrder, products);
 
+        await sendOrderConfirmationEmail(createdOrder, customer);
+
         // Clear the customer from the session after order creation
         req.session.customer = null;
 
@@ -297,8 +328,49 @@ app.get('/customer/search', (req, res) => {
         });
 });
 
+app.get('/customer/delete/:id', (req, res) => {
+    const customerId = req.params.id;
+
+    laundryData.deleteCustomer(customerId)
+        .then(() => {
+            res.redirect('/customers'); // Redirect to the customer list
+        })
+        .catch(err => {
+            console.error('Error deleting customer:', err);
+            res.status(500).send('Error deleting customer');
+        });
+});
+
+app.get('/order/delete/:id', (req, res) => {
+    const orderId = req.params.id;
+
+    laundryData.deleteOrder(orderId)
+        .then(() => {
+            res.redirect('/orders'); // Redirect to the customer list
+        })
+        .catch(err => {
+            console.error('Error deleting order:', err);
+            res.status(500).send('Error deleting order');
+        });
+});
+
+app.get('/product/delete/:id', (req, res) => {
+    const productId = req.params.id;
+
+    laundryData.deleteProduct(productId)
+        .then(() => {
+            res.redirect('/products'); // Redirect to the customer list
+        })
+        .catch(err => {
+            console.error('Error deleting product:', err);
+            res.status(500).send('Error deleting product');
+        });
+});
+
+
+
 // Sync Sequelize and start the server
-sequelize.sync()
+sequelize.sync({ alter: true }) // This will attempt to alter the existing tables to match the models
     .then(() => {
         app.listen(port, () => {
             console.log(`Server running at http://localhost:${port}`);

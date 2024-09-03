@@ -51,6 +51,10 @@ const Order = sequelize.define('Order', {
         autoIncrement: true
     },
     customerName: Sequelize.STRING,
+    orderDate: { 
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW // Automatically set to the current date/time
+    },
     deliveryDate: Sequelize.DATE,
     subtotal: Sequelize.FLOAT,
     discount: Sequelize.FLOAT,
