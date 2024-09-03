@@ -8,6 +8,10 @@ const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
 const { sequelize } = require('./modules/models');
 const nodemailer = require('nodemailer');
+const { orderValidationRules, validate } = require('./validators');
+const moment = require('moment-timezone');
+
+
 
 
 // Set up your PostgreSQL connection string
@@ -211,7 +215,13 @@ app.get('/products', (req, res) => {
 app.get('/orders', (req, res) => {
     laundryData.getAllOrders()
         .then((orders) => {
-            res.render('orderList', { title: 'Orders', orders: orders });
+            // Format each order's deliveryDate
+            const formattedOrders = orders.map(order => ({
+                ...order,
+                deliveryDate: moment(order.deliveryDate).format('YYYY-MM-DD HH:mm:ss')
+            }));
+
+            res.render('orderList', { title: 'Orders', orders: formattedOrders });
         })
         .catch((error) => {
             console.error('Error retrieving orders:', error);
@@ -234,11 +244,9 @@ app.post('/product/add', (req, res) => {
 });
 
 // Route to handle adding an order
-app.post('/order/add', async (req, res) => {
+app.post('/order/add', orderValidationRules(), validate, async (req, res) => {
     const { deliveryDate, products, subtotal, discount, total } = req.body;
     const customer = req.session.customer;
-
-    console.log('customer:', customer);
 
     if (!customer) {
         return res.status(400).render('addOrder', {
@@ -249,11 +257,15 @@ app.post('/order/add', async (req, res) => {
     }
 
     try {
-        // Create the order data
+        // Parse the deliveryDate from the client (datetime-local format) and convert to UTC
+        const deliveryDateLocal = moment(req.body.deliveryDate); // Local time
+        const deliveryDateUTC = deliveryDateLocal.utc().format('YYYY-MM-DD HH:mm:ss'); // Convert to UTC
+
+        // Create the order data with UTC date
         const newOrder = {
             customerId: customer.id,
             customerName: `${customer.firstName} ${customer.lastName}`,
-            deliveryDate: deliveryDate,
+            deliveryDate: deliveryDateUTC, // UTC date for database
             subtotal: parseFloat(subtotal),
             discount: parseFloat(discount),
             total: parseFloat(total)
@@ -261,11 +273,12 @@ app.post('/order/add', async (req, res) => {
 
         // Debugging output
         console.log('New Order:', newOrder);
-        console.log('Products:', products); // Add this to see the products received
+        console.log('Products:', products);
 
         // Create the order and associate products with it
         const createdOrder = await laundryData.addOrder(newOrder, products);
 
+        // Send the confirmation email
         await sendOrderConfirmationEmail(createdOrder, customer);
 
         // Clear the customer from the session after order creation
