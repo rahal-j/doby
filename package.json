@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "connect-pg-simple": "^9.0.1",
     "connect-session-sequelize": "^7.1.7",
     "express": "^4.19.2",
     "express-handlebars": "^7.1.3",

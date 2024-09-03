@@ -5,13 +5,16 @@ const laundryData = require('./modules/laundryData');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const { Sequelize } = require('sequelize');
+const pgSession = require('connect-pg-simple')(session);
+const { sequelize } = require('./modules/models');
 
-// Initialize Sequelize for SQLite
-const sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: './sessions.sqlite'  // This is where your session data will be stored
+// Set up your PostgreSQL connection string
+const postgresConnectionString = 'postgres://LaundryDB_owner:Ztc3rSby9Qfj@ep-tiny-darkness-a5xwx9p5.us-east-2.aws.neon.tech:5432/LaundryDB?sslmode=require';
+
+// Set up session store
+const sessionStore = new pgSession({
+    conString: postgresConnectionString, // PostgreSQL connection string
+    tableName: 'session', // Default is 'session', change if your table name is different
 });
 
 // Middleware to parse JSON bodies
@@ -19,15 +22,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set up session middleware to use PostgreSQL for session storage
+// Set up session middleware with connect-pg-simple
 app.use(session({
     secret: 'your_secret_key',  // Replace with your own secret key
-    store: new SequelizeStore({
-        db: sequelize, // Use the Sequelize instance connected to PostgreSQL
-    }),
+    store: sessionStore,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 1800000 } // Session expiration time (30 minutes)
+    cookie: {
+        maxAge: 1800000,  // Session expiration time (30 minutes)
+        secure: false,    // Set to true if using HTTPS
+        httpOnly: true    // Prevents JavaScript from accessing cookies
+    }
 }));
 
 app.set('views', path.join(__dirname, 'views')); // Ensure views path is set correctly
